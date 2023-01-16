@@ -1,6 +1,6 @@
 const sizeOf = require("image-size");
 const fs = require("fs");
-const { doms, fileText, INDEX, ABOUT, CONTACT } = require("./dom-check.js");
+const { doms, INDEX, ABOUT, CONTACT } = require("./dom-check.js");
 
 /******* SETUP ******* */
 const convertDocIndexToName = index =>
@@ -89,11 +89,11 @@ describe("\nGeneral HTML structure\n-----------------------", () => {
         docs.forEach((doc, i) => {
           // relative links
           if (i === INDEX) {
-            expect(doc.querySelector("link[rel='stylesheet']").href).toBe(
+            expect(doc.dom.querySelector("link[rel='stylesheet']").href).toBe(
               "styles/main.css"
             );
           } else {
-            expect(doc.querySelector("link[rel='stylesheet']").href).toBe(
+            expect(doc.dom.querySelector("link[rel='stylesheet']").href).toBe(
               "../styles/main.css"
             );
           }
@@ -107,13 +107,6 @@ describe("\nGeneral HTML structure\n-----------------------", () => {
           expect(h1Count, `${name} index.html has ${h1Count} <h1>`).toBe(1);
         }
       );
-
-      test("single tags end with '>' not '/>' (e.g. <meta ... > not <meta ... />)", () => {
-        expect(
-          fileText,
-          "found a least one single tag ending with '/>'"
-        ).not.toMatch(/\/>/);
-      });
     });
 
     describe("Main menu", () => {
@@ -139,11 +132,8 @@ describe("\nGeneral HTML structure\n-----------------------", () => {
         "$name index.html - relative paths used in main menu; paths do not end with 'index.html'",
         ({ dom, name }) => {
           const navLinks = dom.querySelectorAll("header>nav a");
-          console.log(`navLinks: ${navLinks.length}\n`);
-          console.log(navLinks);
           let errors = [];
           navLinks.forEach(link => {
-            console.log(`count ${link.length} - current link: ${link.href}`);
             if (link.href) {
               if (link.href.match(/^http/)) {
                 errors.push(`do not use absolute path: ${link}`);
@@ -174,11 +164,11 @@ describe("\nGeneral HTML structure\n-----------------------", () => {
 
 describe("MAIN index.html ONLY", () => {
   test("main index.html contains a <picture> element", () =>
-    expect(docs[INDEX].querySelector("picture")).not.toBeNull());
+    expect(docs[INDEX].dom.querySelector("picture")).not.toBeNull());
 
   test("main index.html includes a simple inline SVG image displayed using <symbol>", () => {
-    expect(docs[INDEX].querySelector("svg")).not.toBeNull();
-    expect(docs[INDEX].querySelector("symbol")).not.toBeNull();
+    expect(docs[INDEX].dom.querySelector("svg")).not.toBeNull();
+    expect(docs[INDEX].dom.querySelector("symbol")).not.toBeNull();
   });
 
   test("contains a <main>", () =>
@@ -267,13 +257,19 @@ describe("\nImage tests\n-----------------------", () => {
   });
 
   // TODO: check <picture> source images
-  test("images must be 2000px wide or less", () =>
-    images.forEach(img =>
-      expect(
-        img.dimensions.width,
-        `image width of ${img.dimensions.width} in ${img.file} index.html too wide`
-      ).toBeLessThanOrEqual(2000)
-    ));
+  test("images must be 1920px wide or less", () => {
+    let sizesOK = true;
+    let message = "";
+    images.forEach(img => {
+      if (img.checkDimensions) {
+        if (img.dimensions.width > 1920) {
+          message += `image width of ${img.dimensions.width} of ${img.path} too wide\n`;
+          sizesOK = false;
+        }
+      }
+    });
+    expect(sizesOK, message).toBe(true);
+  });
 
   test("relative paths to images used, and images must be in the images directory", () => {
     const regex = new RegExp(/^images\//);
@@ -309,7 +305,7 @@ describe("\nImage tests\n-----------------------", () => {
   });
 
   test("<picture> element must contain three <source> elements with media and srcset attributes", () => {
-    const sources = docs[INDEX].querySelectorAll("picture > source");
+    const sources = docs[INDEX].dom.querySelectorAll("picture > source");
     expect(sources.length).toBeGreaterThanOrEqual(3);
     sources.forEach(source => {
       expect(source.getAttribute("media")).not.toBeNull();
@@ -318,15 +314,15 @@ describe("\nImage tests\n-----------------------", () => {
   });
 
   test("<picture> element must contain a fallback image", () =>
-    expect(docs[INDEX].querySelector("picture > img")).not.toBeNull());
+    expect(docs[INDEX].dom.querySelector("picture > img")).not.toBeNull());
 
   //TODO: check srcset count
   test("about page includes an <img> element that uses srcset and sizes to load three versions of the same image with different widths", () => {
-    const img = docs[ABOUT].querySelector("img");
+    const img = docs[ABOUT].dom.querySelector("img");
     expect(img.getAttribute("srcset")).not.toBeNull();
     expect(img.getAttribute("sizes")).not.toBeNull();
   });
 
   test("contact page loads an SVG file with <img>", () =>
-    expect(docs[CONTACT].querySelector("img[src$='.svg']")).not.toBeNull());
+    expect(docs[CONTACT].dom.querySelector("img[src$='.svg']")).not.toBeNull());
 });

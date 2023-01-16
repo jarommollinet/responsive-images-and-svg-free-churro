@@ -4,12 +4,23 @@ Learn how to do the following:
 
 - Use the `<picture>` element to create a responsive image with art direction.
 - Use an `<img>` with `srcset` and `size` attributes to serve different image sizes for different screen widths.
+- Use Dev Tools find images that are loading too slowly, and then learn to optimize them.
 - Load an SVG image with `<img>`.
 - Use inline SVGs and create a `<symbol>` to easily reuse your inline SVG.
 
  ⚠️ This assignment builds on your _Semantic HTML and basic navigation_ assignment                                                                                                                                                                                                                                                                                                                                                                               |
 | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | After cloning this repo and opening it in VSCode, copy the following files and folder from your _Semantic HTML and basic navigation_ assignment into this repo.<br><br><ul><li>📄 index.html</li><li>📄 favicon.ico</li><li>📁images</li><li>📁about</li><li>📁contact</li></ul><br>**Make sure that you don't copy any other folders or files, including the `test` and `readme-assets` folders, the hidden `.git` and `.github` folders, and the `package.json` files** |
+
+## 📄 Add CSS files
+
+In order for the images in this assignment to display properly, we need a little CSS. Load the `styles/main.css` fine in the `<head>` on all three of your html files. Add this to your main `index.html` file:
+
+   `<link rel="stylesheet" href="styles/main.css">`
+
+   And add this to your subpages (notice the relative path to the styles folder):
+
+   `<link rel="stylesheet" href="../styles/main.css">`
 
 ## :art: Add a hero image using `<picture>`
 
@@ -32,19 +43,25 @@ For this assignment we will create three versions of images for laptops, tablets
 | tablet | `768px`   | 4:3             |
 | mobile | `380px`   | 1:1             |
 
-As discussed in class, the widths and ratios are guides. You are welcome to use different ratios based on your own preferences. If you'd like a full screen hero image (100% of the width and height), don't try to force the sizing with HTML. After we learn CSS, you can use CSS to make the image fill the entire screen.
+As discussed in class, the widths and ratios are guides. You are welcome to use different ratios based on your own preferences. If you'd like a full screen hero image (100% of the width and height), don't try to force the sizing with HTML. After we learn CSS, you can use CSS to make the image fill the entire viewport.
 
 Finally, we will keep this assignment simple and assume the maximum screen width is `1920px`, and ignore pixel ratios (which on some devices are up to 4x). **Make sure none of your images are wider than `1920px`.** To see the pixel ratio of your computer or device, check out [mydevice.io](https://www.mydevice.io/).
 
 ### Steps to create your hero `<picture>` element
 
-1. Find a free high-resolution image for your hero image. You can search [Unsplash](https://unsplash.com/) or [Pexels](https://www.pexels.com/). If you use your own image, make sure the image is at least `1920px` wide.
-2. Use a photo editor, such as [befunky](https://www.befunky.com/create/), to crop and resize your image to display on all three screen sizes. Make sure the cropping is obvious; don't just resize the image.
-3. Save your images in the `images` folder. In order for the auto-grader to detect that this is your hero image, begin the file name with `hero`. To make it easy for you to identify which image is which, append the width to the image file name. For example, in the images above, I used the file names
+1. Find a free high-resolution image for your hero image. You can search [Unsplash](https://unsplash.com/), [Pexels](https://www.pexels.com/), or another site of your choice &ndash; as long as the image you are using is copyright-free. You can't simply grab any image off a Google search, as those may have copyrights or usage restrictions. If you use your own image, make sure the image is at least `1920px` wide.
+2. Use a photo editor, such as [befunky](https://www.befunky.com/create/), to crop and then resize your image to display on all three screen sizes. Make sure the cropping is obvious; don't just resize the image.
+3. Save your images in the `images` folder. **In order for the auto-grader to detect that this is your hero image, begin the file name with** `hero`. To make it easy for you to identify which image is which, append the width to the image file name. For example, in the images above, I used the file names
    - `hero-squirrel-1920w.jpg`
    - `hero-squirrel-768w.jpg`
    - `hero-squirrel-380w.jpg`
-4. In your main `index.html` file, change the HTML to load your images (also delete the squirrel example images included in the repo). Here is the code included in the sample index.html:
+4. In your main `index.html` file, add a `<picture>` element. To understand how the `<picture>` element works, watch the video below.
+
+   | 🎥 WATCH: Dev Tools and `<picture>`                                                                                                                                                                                       |
+   | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+   | Watch this 7 minute [video on using Dev Tools with the `<picture>` element](https://youtu.be/2jkA83w1ibc) to learn how to use the Network tab in Dev Tools to check that your `<picture>` element images are downloading correctly |
+
+   You can add the following HTML to your `index.html` file, but change the image file names and the `alt` attribute to accommodate your files:
 
    ```html
    <picture>
@@ -57,16 +74,6 @@ Finally, we will keep this assignment simple and assume the maximum screen width
 
    Make sure to include a fallback `<img>` with descriptive alt text. Since the `<picture>` element is used for art direction, the source image dimensions will not be the same, so you should not use `<img>` `width` and `height` attributes as you would with single images.
 
-   In the video below, "Dev Tools and `<picture>`," I explain what the `media` attribute communicates to the browser.
-
-5. In order for the image to display properly, we need a little CSS. Load the `styles/main.css` in the document `<head>` on all three of your html files. Add this to your main `index.html` file:
-
-   `<link rel="stylesheet" href="styles/main.css">`
-
-   And add this to your subpages (notice the relative path to the styles folder):
-
-   `<link rel="stylesheet" href="../styles/main.css">`
-
 ### Use Live Server and Dev Tools to make sure your images are loading properly
 
 Before you open your webpage in Live Server, check the bottom left info bar on VS Code. You want to make sure you don't have any errors or warnings which should look like this:
@@ -77,11 +84,7 @@ If you have errors or warnings, click on the icons to see what they are and fix 
 
 Once any problems are fixed, open Live Server and use the Dev Tools to make sure your images are loading properly.
 
-| 🎥 WATCH: Dev Tools and `<picture>`                                                                                                                                                                                       |
-| :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Watch this 7 minute [video on using Dev Tools with the `<picture>` element](https://youtu.be/2jkA83w1ibc) to learn how to use the Network tab in Dev Tools to check that your `<picture>` element images are downloading correctly |
-
-## 🎨 On your About page, add an `<img>` with `srcset` and `size` attributes to serve different image sizes for different screen widths
+## 📷 On your About page, add an `<img>` with `srcset` and `size` attributes to serve different image sizes for different screen widths
 
 While desktop computers can handle downloading large images, you don't want a user to waste bandwidth on a mobile device. You want to make sure that the image is downloaded at the right size for the device. This is where `<img>` with `srcset` and `size` attributes come in.
 
@@ -133,12 +136,13 @@ Let's add an `<img>` with different image sizes to our `about/index.html` page.
 | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | This example was simply to introduce you to `srcset` and `sizes`. `sizes` can include media queries and account for high res displays like Apple's Retina display. Learn more at [MDN's The Image Embed element page](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-srcset) |
 
-<!-- TODO: more info here on waterfall -->
 ## ⏱️ Check image file sizes and load times
 
-Images that take too long to download can impact SEO and user experience. Even if an image is resized to 2000px or less, the image file can still be too large and slow your page's load. There are no set rules for how large image files should be, but I recommend making sure they are less than 1MB, if possible.
+Images that take too long to download can impact SEO and user experience. Even if an image is resized to 1920px or less, the image file can still be too large and slow your page's load. There are no set rules for how large image files should be, but I recommend making sure they are less than 1MB, if possible.
 
-You can check the size of your images and their loading time using the Network tab in Dev Tools. If any images seem to be loading too slowly, various utilities exist to further compress images. You can use a website like [TinyJPG](https://tinyjpg.com/) to compress your images.
+| 🎥 Dev Tools and image download time |
+|:---|
+| Watch this 7 minute video I recorded, [Dev Tools and image download time](https://youtu.be/oGgSqT6-KNo) to learn how to use the Network tab in Dev Tools to check image load times and also how to decrease image files sizes using an image editor or [TinyJPG](https://tinyjpg.com/). |
 
 ## 💹 Add SVG images
 
@@ -196,31 +200,42 @@ If you see a yellow dot, it means that the test is still running. Wait for the t
 
 - HTML validation
 - HTML proofer
-- `<head>` should have a `<title>`
-- `<head>` should have a `<meta>` description element
-- all HTML files should contain an `<h1>`, and only one `<h1>`
-- all HTML files should contain favicon information
-- all index.html files must contain a `<header>`
-- all `<header>` elements must contain a `<nav>` element
-- menu items in header `<nav>` must be in an `<ul>`
-- main index.html must contain a `<main>`
-- `<main>` must contain two `<article>` elements
-- each `<article>` must contain an `<h2>` and at least one `<p>`
-- main index.html must contain an `<aside>`
-- main index.html must contain a `<footer>`
-- text in the `<aside>` must inside a `<p>`
-- text in the `<footer>` must be inside a `<p>`
-- image paths are all lowercase and contain no spaces
-- images must be 1920px wide or less
-- relative paths to images used, and images must be in the images directory
-- images that aren't SVGs and images outside `<picture>` elements have the `<img>` `height` and `width` attributes set to the `src` image's intrinsic dimensions
-- stylesheet `main.css` in `styles` folder is loaded on all pages using relative links
-- main `index.html` contains a `<picture>` element
-- `<picture>` element must contain three `<source>` elements with `media` and `srcset` attributes
-- `<picture>` element must contain a fallback image
-- about page includes an `<img>` element that uses `srcset` and `sizes` to load three versions of the same image with different widths
-- contact page loads an SVG file with `<img>`
-- main `index.html` includes a simple inline SVG image displayed using `<symbol>`
+- General HTML structure
+  - REQUIRED FOR ALL PAGES
+    - Conventions
+      - main index.html has `<title>`, `<meta>` description and favicon info
+      - about index.html has `<title>`, `<meta>` description and favicon info
+      - contact index.html has `<title>`, `<meta>` description and favicon info
+      - main index.html contains exactly one `<h1>`
+      - about index.html contains exactly one `<h1>`
+      - contact index.html contains exactly one `<h1>`
+    - Main menu
+      - main index.html has a `<header>` containing a `<nav>` and a `<ul>`
+      - about index.html has a `<header>` containing a `<nav>` and a `<ul>`
+      - contact index.html has a `<header>` containing a `<nav>` and a `<ul>`
+      - main index.html - relative paths used in main menu; paths do not end with 'index.html'
+      - about index.html - relative paths used in main menu; paths do not end with 'index.html'
+      - contact index.html - relative paths used in main menu; paths do not end with 'index.html'
+  - MAIN index.html ONLY
+    - main index.html contains a `<picture>` element
+    - main index.html includes a simple inline SVG image displayed using `<symbol>`
+    - contains a `<main>`
+    - `<main>` contains at least two `<article>` elements
+    - `<article>` elements contain an `<h2>` and at least one `<p>`
+    - contains an `<aside>` with text inside a `<p>`
+    - contains a `<footer>` with text inside a `<p>`
+    - uses at least one instance of `<strong>`
+    - uses at least one instance of `<em>`
+
+- Image tests
+  - image paths are all lowercase and contain no spaces
+  - images must be 1920px wide or less
+  - relative paths to images used, and images must be in the images directory
+  - non-SVG and non-`<picture>` `<img>` height and width attributes set to the image's intrinsic dimensions
+  - `<picture>` element must contain three `<source>` elements with media and srcset attributes
+  - `<picture>` element must contain a fallback image
+  - about page includes an `<img>` element that uses `srcset` and `sizes` to load three versions of the same image with different widths
+  - contact page loads an SVG file with `<img>`
 
 ## Submit your repo URL to Learning Suite
 

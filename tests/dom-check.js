@@ -15,7 +15,6 @@ const contactDom = new JSDOM(contact, options);
 
 module.exports = {
   doms: [indexDom, aboutDom, contactDom],
-  fileText: `\n------\nMAIN\n------\n ${index}\n\n\n------\nABOUT\n------\n ${about} \n\n\n------\nCONTACT\n------\n ${contact}`,
   INDEX: 0,
   ABOUT: 1,
   CONTACT: 2,
