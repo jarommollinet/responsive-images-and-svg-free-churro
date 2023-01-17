@@ -200,6 +200,33 @@ if (doms[0]) {
           ).not.toBeNull();
         }
       );
+
+      test.each(docs)(
+        "$name index.html - relative paths used in main menu; paths do not end with 'index.html'",
+        ({ doc, name }) => {
+          const navLinks = doc.querySelectorAll("header nav a");
+          let errors = [];
+          navLinks.forEach(link => {
+            if (link.href) {
+              if (link.href.match(/^http/)) {
+                errors.push(`do not use absolute path: ${link}`);
+              }
+              if (link.href.match(/^\.\/|^\//)) {
+                errors.push(
+                  `do not begin relative paths with './' or '/': ${link}`
+                );
+              }
+              if (link.href.match(/index.html/)) {
+                errors.push(`do not include 'index.html' in path: ${link}`);
+              } else if (!link.href.match(/\/$/)) {
+                errors.push(
+                  `end relative paths to folder containing index.html with '/': ${link}`
+                );
+              }
+            }
+          });
+        }
+      );
     });
   });
 

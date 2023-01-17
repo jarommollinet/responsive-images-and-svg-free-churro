@@ -217,7 +217,6 @@ If you see a yellow dot, it means that the test is still running. Wait for the t
     - main index.html has a `<header>` containing a `<nav>` and a `<ul>`
     - about index.html has a `<header>` containing a `<nav>` and a `<ul>`
     - contact index.html has a `<header>` containing a `<nav>` and a `<ul>`
-      <!-- TODO add test for this -->
     - main index.html - relative paths used in main menu; paths do not end with 'index.html'
     - about index.html - relative paths used in main menu; paths do not end with 'index.html'
     - contact index.html - relative paths used in main menu; paths do not end with 'index.html'
