@@ -295,6 +295,18 @@ if (doms[0]) {
       });
     });
 
+    test("about page includes an <img> element that uses srcset and sizes to load three versions of the same image with different widths", () => {
+      const img = docs[ABOUT].doc.querySelector("img");
+      expect(
+        img.getAttribute("srcset"),
+        "about index.html img missing srcset"
+      ).not.toBeNull();
+      expect(
+        img.getAttribute("sizes"),
+        "about index.html img missing sizes attribute"
+      ).not.toBeNull();
+    });
+
     test("contact page loads an SVG file with <img>", () =>
       expect(
         docs[CONTACT].doc.querySelector("img[src$='.svg']")
@@ -327,6 +339,17 @@ if (doms[0]) {
       expect(
         docs[INDEX].doc.querySelector("footer"),
         "no <footer> found"
+      ).not.toBeNull();
+    });
+
+    test("main index.html includes a simple inline SVG image displayed using <symbol>", () => {
+      expect(
+        docs[INDEX].doc.querySelector("svg"),
+        "main index.html missing inline svg"
+      ).not.toBeNull();
+      expect(
+        docs[INDEX].doc.querySelector("symbol"),
+        "main index.html missing symbol"
       ).not.toBeNull();
     });
 

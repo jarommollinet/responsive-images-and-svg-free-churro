@@ -200,6 +200,9 @@ If you see a yellow dot, it means that the test is still running. Wait for the t
 
 - HTML validation
 - HTML proofer
+
+Pretests (25):
+
 - General HTML structure
   - REQUIRED `<head>` INFO
     - main index.html has `<title>`, `<meta>` description and favicon info
@@ -226,20 +229,12 @@ If you see a yellow dot, it means that the test is still running. Wait for the t
   - relative paths to images used, and images must be in the images directory
   - non-SVG and non-`<picture>` `<img>` height and width attributes set to the image's intrinsic dimensions
   - `<picture>` element must contain three `<source>` elements with media and srcset attributes
-  <!-- TODO add this -->
   - about page includes an `<img>` element that uses `srcset` and `sizes` to load three versions of the same image with different widths
   - contact page loads an SVG file with `<img>`
 - MAIN index.html ONLY
   - main index.html must contain a `<picture>`, one `<main>`, at least two `<article>`, an `<aside>`, and a `<footer>`
-    <!-- TODO add inline SVG test -->
   - main index.html includes a simple inline SVG image displayed using `<symbol>`
   - `<article>` must contain an `<h2>` and at least one `<p>`
-    <!-- TODO: add these -->
-  - contains an `<aside>` with text inside a `<p>`
-  - contains a `<footer>` with text inside a `<p>`
-    <!-- TODO add these  -->
-  - uses at least one instance of `<strong>`
-  - uses at least one instance of `<em>`
 
 ## Submit your repo URL to Learning Suite
 
