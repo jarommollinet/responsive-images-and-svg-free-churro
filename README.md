@@ -201,41 +201,46 @@ If you see a yellow dot, it means that the test is still running. Wait for the t
 - HTML validation
 - HTML proofer
 - General HTML structure
-  - REQUIRED FOR ALL PAGES
-    - Conventions
-      - main index.html has `<title>`, `<meta>` description and favicon info
-      - about index.html has `<title>`, `<meta>` description and favicon info
-      - contact index.html has `<title>`, `<meta>` description and favicon info
-      - main index.html contains exactly one `<h1>`
-      - about index.html contains exactly one `<h1>`
-      - contact index.html contains exactly one `<h1>`
-    - Main menu
-      - main index.html has a `<header>` containing a `<nav>` and a `<ul>`
-      - about index.html has a `<header>` containing a `<nav>` and a `<ul>`
-      - contact index.html has a `<header>` containing a `<nav>` and a `<ul>`
-      - main index.html - relative paths used in main menu; paths do not end with 'index.html'
-      - about index.html - relative paths used in main menu; paths do not end with 'index.html'
-      - contact index.html - relative paths used in main menu; paths do not end with 'index.html'
-  - MAIN index.html ONLY
-    - main index.html contains a `<picture>` element
-    - main index.html includes a simple inline SVG image displayed using `<symbol>`
-    - contains a `<main>`
-    - `<main>` contains at least two `<article>` elements
-    - `<article>` elements contain an `<h2>` and at least one `<p>`
-    - contains an `<aside>` with text inside a `<p>`
-    - contains a `<footer>` with text inside a `<p>`
-    - uses at least one instance of `<strong>`
-    - uses at least one instance of `<em>`
-
+  - REQUIRED `<head>` INFO
+    - main index.html has `<title>`, `<meta>` description and favicon info
+    - about index.html has `<title>`, `<meta>` description and favicon info
+    - contact index.html has `<title>`, `<meta>` description and favicon info
+  - STYLESHEETS LOADED
+    - main index.html loads styles/main.css
+    - about index.html loads styles/main.css
+    - contact index.html loads styles/main.css
+  - ONLY ONE `<h1>` IN AN HTML FILE
+    - main index.html contains exactly one `<h1>`
+    - about index.html contains exactly one `<h1>`
+    - contact index.html contains exactly one `<h1>`
+  - MAIN MENU
+    - main index.html has a `<header>` containing a `<nav>` and a `<ul>`
+    - about index.html has a `<header>` containing a `<nav>` and a `<ul>`
+    - contact index.html has a `<header>` containing a `<nav>` and a `<ul>`
+      <!-- TODO add test for this -->
+    - main index.html - relative paths used in main menu; paths do not end with 'index.html'
+    - about index.html - relative paths used in main menu; paths do not end with 'index.html'
+    - contact index.html - relative paths used in main menu; paths do not end with 'index.html'
 - Image tests
   - image paths are all lowercase and contain no spaces
   - images must be 1920px wide or less
   - relative paths to images used, and images must be in the images directory
   - non-SVG and non-`<picture>` `<img>` height and width attributes set to the image's intrinsic dimensions
   - `<picture>` element must contain three `<source>` elements with media and srcset attributes
-  - `<picture>` element must contain a fallback image
+  <!-- TODO add this -->
   - about page includes an `<img>` element that uses `srcset` and `sizes` to load three versions of the same image with different widths
   - contact page loads an SVG file with `<img>`
+- MAIN index.html ONLY
+  - main index.html must contain a `<picture>`, one `<main>`, at least two `<article>`, an `<aside>`, and a `<footer>`
+    <!-- TODO add inline SVG test -->
+  - main index.html includes a simple inline SVG image displayed using `<symbol>`
+  - `<article>` must contain an `<h2>` and at least one `<p>`
+    <!-- TODO: add these -->
+  - contains an `<aside>` with text inside a `<p>`
+  - contains a `<footer>` with text inside a `<p>`
+    <!-- TODO add these  -->
+  - uses at least one instance of `<strong>`
+  - uses at least one instance of `<em>`
 
 ## Submit your repo URL to Learning Suite
 
