@@ -14,7 +14,13 @@ Learn how to do the following:
 
 ## 📄 Add CSS files
 
-In order for the images in this assignment to display properly, we need a little CSS. Load the `styles/main.css` fine in the `<head>` on all three of your html files. Add this to your main `index.html` file:
+In order for the images in this assignment to display properly, we need a little CSS. Load the `styles/main.css` file in the `<head>` section on all three of your html files.
+
+| 💡 `<head>` contains info for the browser, not for the user. |
+| :---------------------------------------------------------------- |
+| Remember that the `<head>` section of an HTML file contains information for the browser, not for the user. This is where you add meta info about your site and load CSS (and, under certain conditions, JavaScript). Anything you want the user to "see" should be inside the  `<body>` tags. |
+
+Add this to your main `index.html` file:
 
    `<link rel="stylesheet" href="styles/main.css">`
 
@@ -28,47 +34,75 @@ A hero image is a large banner image that is displayed at the top of a webpage a
 
 For this assignment, place your hero image either above or below the header on your main `index.html` page.
 
-| 💡 Hero videos                                                                                      |
-| :------------------------------------------------------------------------------------------------------ |
-| _Hero videos are becoming popular, and we will learn how to create a hero video later in the semester_. |
-
 A `<picture>` element allows for _art direction_, or different versions of images cropped to display best on different screen sizes and devices. Below is an example of images cropped to display on (from left to right) a laptop, a tablet, and a mobile phone.
 ![art-direction](readme-assets/art-direction.jpg)
 
-For this assignment we will create three versions of images for laptops, tablets, and mobile devices. There are no "set" widths and heights to use, but for this assignment, assume
+### Determine the screen sizes and ratios
 
-| Device | Max width | Suggested ratio |
+For this assignment we will create three versions of images for laptops, tablets, and mobile devices. There are no "set" widths or _aspect ratios_ (the width to height ratios) to use, but to keep it simple, you can follow these recommendations:
+
+| Device | Max width | Suggested aspect ratio |
 | ------ | --------- | --------------- |
-| laptop | `1920px`  | 16:9            |
-| tablet | `768px`   | 4:3             |
-| mobile | `380px`   | 1:1             |
+| laptop | `2000px`  | 16:9            |
+| tablet | `800px`   | 4:3             |
+| mobile | `400px`   | 1:1             |
 
-As discussed in class, the widths and ratios are guides. You are welcome to use different ratios based on your own preferences. If you'd like a full screen hero image (100% of the width and height), don't try to force the sizing with HTML. After we learn CSS, you can use CSS to make the image fill the entire viewport.
+As discussed in class, the widths and aspect ratios are guides and it's best to test on actual devices to find an ideal max width and aspect ratio for each device-dependant layout. You are welcome to use different ratios based on your own preferences.
 
-Finally, we will keep this assignment simple and assume the maximum screen width is `1920px`, and ignore pixel ratios (which on some devices are up to 4x). **Make sure none of your images are wider than `1920px`.** To see the pixel ratio of your computer or device, check out [mydevice.io](https://www.mydevice.io/).
+| ⚠️ Full screen images |
+|:----------------------|
+| If you'd like a full screen hero image (100% of the screen width and 100% of the screen height or  _viewport_), don't try to force the sizing with HTML or by cropping, as there are too many variations in screen sizes to make it work without CSS. After we learn CSS, you will learn how to properly display full screen images with `object-fit`.
+
+---
+### An aside: pixel ratios
+
+ Pixel ratios are the number of physical pixels used to display one image pixel.
+
+ We will keep this assignment simple and and ignore pixel ratios. However, if you continue in web development, you should be aware of pixel ratios.
+
+To increase image sharpness, many devices use 2-4 physical pixels to display one image pixel. Apple's Retina display is so named because its screen pixels are supposedly too small to be seen by the human eye at a typical viewing distance. Below is an example of an iPhone 4 Retina display with a 2 pixel ratio:
+
+![iPhone 4 Retina image](readme-assets/retina-display.jpg)
+
+Compare it to an iPhone 3GS with a 1 pixel ratio:
+
+![iPhone 3GS non-Retina image](readme-assets/non-retina-display.jpg)
+_Images from Wikipedia_
+
+A Samsung Galaxy S8 has a pixel ratio of 4. While it advertises a screen width of 1440px, it's width for web design purposes is only 360 pixels (360 x 4 = 1440).
+
+The image `srcset` attribute has pixel density descriptors that can detect pixel ratios and serve higher resolution images to devices with higher pixel ratios, but that is beyond the scope of the assignment.
+
+To see the pixel ratio of your computer or device, check out [mydevice.io](https://www.mydevice.io/).
+
+---
+
+| ⚠️ Max image width of 2000 pixels |
+|:---|
+| For this class, assume a pixel ratio of 1 and a maximum viewport width of `2000px`. In other words, **make sure that none of your images are wider than `2000px`.**|
 
 ### Steps to create your hero `<picture>` element
 
-1. Find a free high-resolution image for your hero image. You can search [Unsplash](https://unsplash.com/), [Pexels](https://www.pexels.com/), or another site of your choice &ndash; as long as the image you are using is copyright-free. You can't simply grab any image off a Google search, as those may have copyrights or usage restrictions. If you use your own image, make sure the image is at least `1920px` wide.
-2. Use a photo editor, such as [befunky](https://www.befunky.com/create/), to crop and then resize your image to display on all three screen sizes. Make sure the cropping is obvious; don't just resize the image.
-3. Save your images in the `images` folder. **In order for the auto-grader to detect that this is your hero image, begin the file name with** `hero`. To make it easy for you to identify which image is which, append the width to the image file name. For example, in the images above, I used the file names
-   - `hero-squirrel-1920w.jpg`
-   - `hero-squirrel-768w.jpg`
-   - `hero-squirrel-380w.jpg`
+1. Find a free high-resolution image for your hero image. You can search [Unsplash](https://unsplash.com/), [Pexels](https://www.pexels.com/), or another site of your choice &ndash; as long as the image you are using is copyright-free. You can't simply grab any image off a Google search, as those may have copyrights or usage restrictions. If you use your own image, make sure the image is at least `2000px` wide.
+2. Use a photo editor, such as [befunky](https://www.befunky.com/create/), to crop and then resize your image to display on all three screen sizes. Make sure the cropping is obvious; I recommend cropping to different aspect ratios such as those suggest above, and then resizing them to the suggested width.
+3. Save your images in the `images` folder. **In order for the auto-grader to detect that these are your hero images, you must begin the file names with** `hero`. Additionally, to make it easy for you to identify which image is which, I recommend appending the width to the image file name. For example, in the images above, I used the file names
+   - `hero-squirrel-2000px.jpg`
+   - `hero-squirrel-800px.jpg`
+   - `hero-squirrel-400px.jpg`
 4. In your main `index.html` file, add a `<picture>` element. To understand how the `<picture>` element works, watch the video below.
 
    | 🎥 WATCH: Dev Tools and `<picture>`                                                                                                                                                                                       |
    | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-   | Watch this 7 minute [video on using Dev Tools with the `<picture>` element](https://youtu.be/2jkA83w1ibc) to learn how to use the Network tab in Dev Tools to check that your `<picture>` element images are downloading correctly |
+   | Watch this 7 minute [video on using Dev Tools with the `<picture>` element](https://youtu.be/2jkA83w1ibc) to learn how to use the Network tab in Dev Tools to check that your `<picture>` element images are downloading correctly. I simplified the widths for this assignment, so don't be worried about image widths in the video not matching the ones in this assignment. |
 
    You can add the following HTML to your `index.html` file, but change the image file names and the `alt` attribute to accommodate your files:
 
    ```html
    <picture>
-    <source media="(min-width: 769px)" srcset="images/hero-squirrel-1920w.jpg">
-    <source media="(min-width: 381px)" srcset="images/hero-squirrel-768w.jpg">
-    <source media="(max-width: 380px)" srcset="images/hero-squirrel-380w.jpg">
-    <img src="images/hero-squirrel-768w.jpg" alt="brown squirrel on green grass lawn">
+    <source media="(min-width: 801px)" srcset="images/hero-squirrel-2000px.jpg">
+    <source media="(min-width: 401px)" srcset="images/hero-squirrel-800px.jpg">
+    <source media="(max-width: 400px)" srcset="images/hero-squirrel-400px.jpg">
+    <img src="images/hero-squirrel-800px.jpg" alt="brown squirrel on green grass lawn">
    </picture>
    ```
 
@@ -82,7 +116,7 @@ Before you open your webpage in Live Server, check the bottom left info bar on V
 
 If you have errors or warnings, click on the icons to see what they are and fix them.
 
-Once any problems are fixed, open Live Server and use the Dev Tools to make sure your images are loading properly.
+Once any problems are fixed, open Live Server and use the Dev Tools Network tab to make sure your images are loading properly.
 
 ## 📷 On your About page, add an `<img>` with `srcset` and `size` attributes to serve different image sizes for different screen widths
 
@@ -95,15 +129,15 @@ Now, unlike the `<picture>` element, `<img>` with `srcset` and `size` attributes
 Let's add an `<img>` with different image sizes to our `about/index.html` page.
 
 1. Find a free high-resolution image for your About page image. You can search [Unsplash](https://unsplash.com/) or [Pexels](https://www.pexels.com/). Let's keep the max width of this image at 900px.
-2. Use a photo editor, such as [befunky](https://www.befunky.com/create/), to crop your image if desired, and then resize your image to be 900px wide. Save this image in the `images` folder. For convenience, append "-900w" to the image file name.
+2. Use a photo editor, such as [befunky](https://www.befunky.com/create/), to crop your image if desired, and then resize your image to be 900px wide. Save this image in the `images` folder. For convenience, append "-900px" to the image file name.
 3. Resize the same image to 600px wide and then 300px wide, appending the widths to the files names. Save these images in the `images` folder.
 4. Open your `about/index.html` file in VS Code. If you were simply loading the 600px wide image, you'd use this markup:
 
-   `<img src="../images/staring-squirrel-600w.jpg" alt="a brown squirrel on a black background" width="600" height="600">`
+   `<img src="../images/staring-squirrel-600px.jpg" alt="a brown squirrel on a black background" width="600" height="600">`
 
    but you would use your image file and a relevant `alt` attribute. Notice I've added the `width` and `height` attributes to the `<img>` element to match the intrinsic dimensions of the image.
 
-5. Next, let's add the other images using the `srcset` attribute. List the path to all the images and then follow each path with a "width descriptor," which is the _intrinsic_ (actual) pixel width of the image (srcset can gets more complicated by accounting for screen pixel density, but we will keep this example as simple as possible). We added the width to the file name to help us keep the images separate, but the browser can't read that and needs you to let it know the width. Separate each path and width descriptor with a comma:
+5. Next, let's add the other images using the `srcset` attribute. List the path to all the images and then follow each path with a _width descriptor_ which is the _intrinsic_ (actual) pixel width of the image (srcset can gets more complicated by accounting for pixel ratios, but we will keep this example as simple as possible). We added the width to the file name to help us keep the images separate, but the browser can't read that and needs you to let it know the width. Separate each path and width descriptor with a comma:
 
    ```html
    <img srcset="../images/staring-squirrel-300w.jpg 300w,
@@ -115,30 +149,30 @@ Let's add an `<img>` with different image sizes to our `about/index.html` page.
 
 6. Finally we need to add information to the `sizes` attribute. The sizes are relative to the browser viewport. The sizes will make more sense when you are able to use CSS to layout images.
 
-   I added some CSS to force the image on the About page to always be 50% of the page width. We can let the browser know that instead of downloading an image that is the full width of the page, it should download an image that is half of the page width. Add the `sizes` attribute below to tell the browser the image will always be half the page width (or 50vw - vertical width). _We will learn more about this in the CSS lesson._
+   I added some CSS to force the image on the About page to always be 50% of the page width. We can let the browser know that instead of downloading an image that is the full width of the page, it should download an image that is half of the page width. Add the `sizes` attribute below to tell the browser the image will always be half the page width (or 50vw - viewport width). _We will learn more about this in the CSS lesson._
 
    ```html
-   <img srcset="../images/staring-squirrel-300w.jpg 300w,
-            ../images/staring-squirrel-600w.jpg 600w,
-            ../images/staring-squirrel-900w.jpg 900w"
+   <img srcset="../images/staring-squirrel-300px.jpg 300w,
+            ../images/staring-squirrel-600px.jpg 600w,
+            ../images/staring-squirrel-900px.jpg 900w"
         sizes="50vw"
-        src="../images/staring-squirrel-600w.jpg"
+        src="../images/staring-squirrel-600px.jpg"
         alt="a brown squirrel on a black background" width="600" height="600">
    ```
 
-   In this example, if your browser viewport is 1000px wide, the browser will look for an image that is at least 500px wide. It will download the 600px wide image.
+   In this example, if your browser viewport is 1000px wide, the browser will look for an image that is at least 500px wide. If it encounters the HTML above, it will download the 600px wide image.
 
-   Open the Network tab in Firefox's Dev Tools and resize the window to see when the images download.
+Open the Network tab in Firefox's Dev Tools and resize the window to see when the images download.
 
-   Chrome handles image loading a little differently and is more likely to reuse a larger image in the cache. Try viewing the Network tab in Chrome to see the difference.
+Chrome handles image loading a little differently and is more likely to reuse a larger image in the cache. Try viewing the Network tab in Chrome to see the difference.
 
 | 📖 Learn more about srcset and sizes                                                                                                                                                                                                                                                         |
 | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| This example was simply to introduce you to `srcset` and `sizes`. `sizes` can include media queries and account for high res displays like Apple's Retina display. Learn more at [MDN's The Image Embed element page](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-srcset) |
+| This example was simply to introduce you to `srcset` and `sizes`. The `srcset` attribute can detect pixel ratios and `sizes` can include media queries. Learn more at [MDN's The Image Embed element page](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-srcset) |
 
 ## ⏱️ Check image file sizes and load times
 
-Images that take too long to download can impact SEO and user experience. Even if an image is resized to 1920px or less, the image file can still be too large and slow your page's load. There are no set rules for how large image files should be, but I recommend making sure they are less than 1MB, if possible.
+Images that take too long to download can impact SEO and user experience. Even if an image is resized to 2000px or less, the image file can still be too large and slow your page's load time. There are no set rules for how large image files should be, but I recommend making sure they are less than 1MB, if possible.
 
 | 🎥 Dev Tools and image download time |
 |:---|
